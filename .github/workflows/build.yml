@@ -50,9 +50,11 @@ jobs:
           mkdir extracted
           tar xf saved-module-image.tar -C extracted
 
-      - name: Compress and upload the extracted file
+      - name: Compress extracted file
         run: |
           tar czf otel_ngx_module_${{ matrix.nginx_version }}_${{ matrix.platform }}.tgz -C extracted/usr/lib/nginx/modules otel_ngx_module.so
+
+      - name: Upload extracted file
         uses: actions/upload-artifact@v2
         with:
           name: otel-ngx-module-${{ matrix.nginx_version }}-${{ matrix.platform }}.tgz
