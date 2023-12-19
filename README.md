@@ -31,14 +31,21 @@ docker build \
 ### Usage of module
 
 ```dockerfile
-FROM nginx:1.21.6-alpine
+# Version must be same for source image and for version that was used for build module
+FROM nginx:1.25.3-alpine
 
-RUN apk add --no-cache unzip libstdc++
+RUN apk add --no-cache tar libstdc++
 
-ADD https://github.com/contember/nginx-open-telemetery-module/releases/download/todo.tgz /opt
+# Change Nginx version and/or architecture (amd64 / arm64)
+ADD https://github.com/contember/nginx-open-telemetry-module/releases/download/v1.0.0/otel_ngx_module_1.25.3-alpine_amd64.tgz /opt
 
-RUN cd /opt && unzip todo.tgz; tar xvfz todo.tgz
+# Unzip asset and put it into rigt place
+RUN cd /opt ; tar xf otel_ngx_module_1.25.3-alpine_amd64.tgz
 RUN cp /opt/otel_ngx_module.so /usr/lib/nginx/modules/otel_ngx_module.so
+
+# (Optional) put custom configuration files
+COPY opentelemetry.toml /etc/nginx/opentelemetry.toml
+COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
 ### Usage in examples
@@ -62,7 +69,7 @@ http {
     default_type  application/octet-stream;
 
     # Configuration for OpenTelemetry module
-    opentelemetry_config /etc/nginx/opentelemetry_module.toml;
+    opentelemetry_config /etc/nginx/opentelemetry.toml;
     access_log /var/log/nginx/access.log  main;
 
     keepalive_timeout  65;
