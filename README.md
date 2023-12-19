@@ -1,24 +1,24 @@
 # Nginx OpenTelemetry (OTEL) module
 
-Currently, Nginx OTEL module package for Debian/Ubuntu based systems is officially distributed and maintained
-by Nginx but its available only for Nginx Plus users. All source codes are open sources by Nginx, 
-and suggesting to compile and distribute module by yourself.
+The Nginx OTEL module package, designed for Debian/Ubuntu-based systems, 
+is exclusively available to Nginx Plus users through official distribution and maintenance by Nginx. 
+While Nginx provides all the open-source code, they recommend users compile and distribute the module independently.
 
-This exact module comes from Open Telemetry Nginx addon (https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/nginx)
-and not from Nginx based (https://github.com/nginxinc/nginx-otel) but both of them internally using `opentelemetry-cpp`
-so functionality is almost identical expect Open Telemetry addon is configured externally and not directly with Nginx
-dialect in `nginx.conf` like files.
+This particular module is derived from the Open Telemetry Nginx addon 
+(found at [https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/nginx](https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/nginx)), 
+not the Nginx-based source ([https://github.com/nginxinc/nginx-otel](https://github.com/nginxinc/nginx-otel)). 
+Both utilize `opentelemetry-cpp`, resulting in nearly identical functionality. 
+However, the Open Telemetry addon is configured externally rather than directly within Nginx using the `nginx.conf` file.
 
-But there is not much of fully describing tutorials how to compile for module compatible with Alpine base systems and/or AMR
-based CPUs so this repository comes with examples how to build & configure Nginx OTEL module for Alpine.
+Notably, comprehensive tutorials for compiling this module for Alpine-based systems or ARM CPUs are scarce. 
+Therefore, this repository provides examples for building and configuring the Nginx OTEL module for Alpine.
 
 > **Warning**
-> Important to mention is that module must be compiled on same source code of Nginx as is used for running it
+> It's crucial to compile the module using the same Nginx source code version as the one in operation.
 
-Output of building process is simply module file `otel_ngx_module.so` located in `/usr/lib/nginx/modules/` folder.
-You can simply distribute this file by archiving it, but It's suggested to make process repeatable,
-that means you need some form of building pipeline for example when Nginx version that is used for build will be outdated.
-
+The compilation process yields a module file, `otel_ngx_module.so`, located in the `/usr/lib/nginx/modules/` directory. 
+While this file can be simply archived for distribution, a repeatable process is advised. 
+This means establishing a build pipeline, especially when the Nginx version used for the build becomes outdated.
 
 ### Building module
 
