@@ -27,11 +27,12 @@ jobs:
             --platform linux/${{ matrix.platform }} \
             --file Dockerfile \
             --build-arg IMAGE=nginx:${{ matrix.nginx_version }} \
-            --tag modules:${{ matrix.nginx_version }}-${{ matrix.platform }} \
+            --tag module-temp-image \
+            --load \
             .
 
       - name: Run temp container
-        run: docker run --name temp-container -d modules:${{ matrix.nginx_version }}-${{ matrix.platform }}
+        run: docker run --name temp-container -d module-temp-image
 
       - name: Extract module from container
         run: docker cp temp-container:/usr/lib/nginx/modules/otel_ngx_module.so otel_ngx_module.so
