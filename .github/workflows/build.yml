@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         platform: [amd64, arm64]
-        nginx_version: [1.21.6-alpine, 1.22.0-alpine, 1.24.0-alpine, 1.25.3-alpine]
+        nginx_version: [1.24.0-alpine, 1.25.3-alpine]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
