@@ -108,3 +108,9 @@ name = "AlwaysOn" # Also: AlwaysOff, TraceIdRatioBased
 ratio = 0.1
 parent_based = false
 ```
+
+### Related sources
+- [Open Telemetry C++ sdk](https://github.com/open-telemetry/opentelemetry-cpp)
+- [Open Telemetry Nginx module](https://github.com/open-telemetry/opentelemetry-cpp-contrib)
+- [Nginx Open Telemetry module](https://github.com/nginxinc/nginx-otel)
+- [Inspiration for this repository](https://github.com/tangx/Nginx-With-OpenTelemetry)
