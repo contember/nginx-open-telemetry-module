@@ -1,9 +1,6 @@
 name: Build module for every architecture
 
 on:
-  push:
-    branches:
-      - main
   release:
     types: [published]
 
