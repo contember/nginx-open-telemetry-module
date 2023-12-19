@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [amd64, linux/arm64]
+        platform: [amd64, arm64]
         nginx_version: [1.21.6-alpine, 1.22.0-alpine]
     steps:
       - name: Checkout code
@@ -24,7 +24,7 @@ jobs:
       - name: Build, tag, and push image
         run: |
           docker buildx build \
-            --platform ${{ matrix.platform }} \
+            --platform linux/${{ matrix.platform }} \
             --file Dockerfile \
             --build-arg IMAGE=nginx:${{ matrix.nginx_version }} \
             --tag modules:${{ matrix.nginx_version }}-${{ matrix.platform }} \
