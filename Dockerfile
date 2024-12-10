@@ -55,6 +55,7 @@ RUN git clone --shallow-submodules --depth 1 --recurse-submodules -b v1.8.1 \
 
 RUN git clone https://github.com/open-telemetry/opentelemetry-cpp-contrib.git \
   && cd opentelemetry-cpp-contrib/instrumentation/nginx \
+  && git reset --hard 2a0db982f3d7ee91dfbe8150435e49e837bfb7ce \
   && mkdir build \
   && cd build \
   && cmake -DCMAKE_BUILD_TYPE=Release \
