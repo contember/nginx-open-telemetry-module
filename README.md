@@ -25,7 +25,7 @@ This means establishing a build pipeline, especially when the Nginx version used
 ```bash
 docker build \
     -f Dockerfile \
-    --build-arg=IMAGE=nginx:1.21.6-alpine .
+    --build-arg=IMAGE=nginx:1.25.3-alpine .
 ```
 
 ### Usage of module
