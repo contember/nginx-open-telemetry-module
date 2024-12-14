@@ -1,12 +1,11 @@
 name: Build module for every architecture
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       matrix:
         platform: [amd64, arm64]
@@ -37,17 +36,3 @@ jobs:
       - name: Compress extracted module
         run: |
           tar -cvf otel_ngx_module_${{ matrix.nginx_version }}_${{ matrix.platform }}.tgz otel_ngx_module.so
-
-      - name: Upload extracted file
-        uses: actions/upload-artifact@v2
-        with:
-          name: otel_ngx_module_${{ matrix.nginx_version }}_${{ matrix.platform }}.tgz
-          path: otel_ngx_module_${{ matrix.nginx_version }}_${{ matrix.platform }}.tgz
-
-      - name: Upload extracted file as release artifact asset
-        if: github.event_name == 'release'
-        uses: mkatanski/release-files-action@v1.0.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release-tag: ${{ github.ref_name }}
-          file-path: otel_ngx_module_${{ matrix.nginx_version }}_${{ matrix.platform }}.tgz
